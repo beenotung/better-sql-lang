@@ -14,8 +14,17 @@
   align-items: center;
 }
 
+#demo-container fieldset {
+  min-width: 350px;
+}
+
 legend {
   padding: 0.25rem;
+}
+
+.demo-button-container {
+  margin: 2px;
+  margin-bottom: 0.5rem;
 }
 
 textarea {
@@ -24,6 +33,15 @@ textarea {
   padding: 0.5rem;
   font-size: 1rem;
 }
+@media screen and (max-width: 700px) {
+  #demo-container {
+    flex-wrap: wrap;
+  }
+  textarea {
+    width: calc(100% - 1rem);
+  }
+}
+
 #demo-container fieldset {
   position: relative;
 }

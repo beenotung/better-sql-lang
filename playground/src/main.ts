@@ -4,6 +4,7 @@ declare let noscriptMsg: HTMLDivElement
 declare let errorMsg: HTMLDivElement
 
 declare let loadExampleBtn: HTMLButtonElement
+declare let copySQLBtn: HTMLButtonElement
 
 declare let queryInput: HTMLTextAreaElement
 declare let sqlOutput: HTMLTextAreaElement
@@ -12,6 +13,7 @@ declare let querySpace: HTMLDivElement
 declare let sqlSpace: HTMLDivElement
 
 loadExampleBtn.addEventListener('click', loadExample)
+copySQLBtn.addEventListener('click', copySQL)
 
 queryInput.addEventListener('input', updateQuery)
 
@@ -80,7 +82,7 @@ function checkEnter(event: KeyboardEvent) {
 function updateTextAreaHeight() {
   const height = Math.max(
     calcHeight(queryInput, querySpace),
-    calcHeight(sqlOutput, sqlSpace)
+    calcHeight(sqlOutput, sqlSpace),
   )
   queryInput.style.minHeight = height + 'px'
   sqlOutput.style.minHeight = height + 'px'
@@ -139,7 +141,7 @@ select reply [
   comment
 ]
 `,
-].map((query) => query.trim())
+].map(query => query.trim())
 
 function loadExample() {
   for (const query of sampleQueries) {
@@ -151,5 +153,28 @@ function loadExample() {
     break
   }
 }
+
+let copySQLTimeout: ReturnType<typeof setTimeout>
+
+function copySQL() {
+  if (copySQLTimeout) {
+    clearTimeout(copySQLTimeout)
+  }
+  sqlOutput.select()
+  sqlOutput.setSelectionRange(0, sqlOutput.value.length)
+  if (document.execCommand('copy')) {
+    copySQLBtn.textContent = 'Copied to clipboard'
+    copySQLBtn.style.color = 'darkgreen'
+  } else {
+    copySQLBtn.textContent = 'Clipboard not supported, please copy manually'
+    copySQLBtn.style.color = 'red'
+  }
+  copySQLTimeout = setTimeout(() => {
+    copySQLBtn.textContent = 'Copy SQL query'
+    copySQLBtn.style.color = ''
+  }, 2500)
+}
+
+updateQuery()
 
 noscriptMsg.remove()

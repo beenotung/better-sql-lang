@@ -18,16 +18,21 @@
       This live demo requires Javascript to work. Please enable it for this
       domain then refresh the page.
     </p>
-    <button id="loadExampleBtn">Load sample query</button>
     <div id="demo-container">
       <fieldset>
         <legend>better-sql query</legend>
+        <div class="demo-button-container">
+          <button id="loadExampleBtn">Load sample query</button>
+        </div>
         <textarea id="queryInput" placeholder="Enter query here"></textarea>
         <div id="querySpace" class="space"></div>
       </fieldset>
       =>
       <fieldset>
         <legend>generated sql query</legend>
+        <div class="demo-button-container">
+          <button id="copySQLBtn">Copy SQL query</button>
+        </div>
         <textarea
           id="sqlOutput"
           placeholder="Generated sql will be shown here"
