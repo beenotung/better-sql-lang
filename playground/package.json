@@ -21,6 +21,6 @@
     "typescript": "^4.7.3"
   },
   "dependencies": {
-    "better-sql.ts": "link:.."
+    "better-sql.ts": "file:.."
   }
 }
